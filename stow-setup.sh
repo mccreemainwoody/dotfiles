@@ -1,5 +1,6 @@
 cd ./dotfiles
 stow --target ~ neofetch
+stow --target ~ bashrc
 stow --target ~ git
 stow --target ~ kitty
 stow --target ~ nvim
