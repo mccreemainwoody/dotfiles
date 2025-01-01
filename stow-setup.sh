@@ -12,3 +12,8 @@ cd ../themes
 
 cd cursors
 stow --target ~ miku-cursor-linux
+
+cd ../wallpapers
+stow --target ~ hyprlock-bg
+
+cd ../../
