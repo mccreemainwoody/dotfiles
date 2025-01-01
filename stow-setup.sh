@@ -2,6 +2,7 @@ cd ./dotfiles
 stow --target ~ neofetch
 stow --target ~ fastfetch
 stow --target ~ bashrc
+stow --target ~ vimrc
 stow --target ~ git
 stow --target ~ kitty
 stow --target ~ nvim
