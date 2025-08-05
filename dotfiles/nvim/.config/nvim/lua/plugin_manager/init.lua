@@ -1,3 +1,6 @@
 return {
-	setup = require("plugin_manager.main").main,
+	setup = function()
+		require("plugin_manager.install").install()
+		require("plugin_manager.setup").init()
+	end,
 }

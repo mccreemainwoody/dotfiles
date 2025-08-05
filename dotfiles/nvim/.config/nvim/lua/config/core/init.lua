@@ -1,6 +1,6 @@
-vim_options = require("config/vim_options")
-keymap = require("config/keymap")
-autocommands = require("config/autocommands")
+local vim_options = require("config.core.vim_options")
+local keymap = require("config.core.keymap")
+local autocommands = require("config.core.autocommands")
 
 return {
 	setup_all = function()

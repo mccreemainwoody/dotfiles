@@ -84,7 +84,7 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
-require("config").setup_all()
+require("config.core").setup_all()
 
 require("plugin_manager").setup()
 
