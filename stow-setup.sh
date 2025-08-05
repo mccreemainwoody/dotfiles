@@ -18,3 +18,6 @@ cd ../wallpapers
 stow --target ~ hyprlock-bg
 
 cd ../../
+
+echo "Setup succeeded ! Don't forget to add a startup sound if you want to " \
+     "at ~/.local/share/audio/startup.sh"
