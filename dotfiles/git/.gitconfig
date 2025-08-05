@@ -2,4 +2,7 @@
 	name = Clément METZ
 	email = metz.clement@gmail.com
 [core]
-	editor = vim
+	editor = nvim
+	autocrlf = input
+[merge]
+	ff = false
