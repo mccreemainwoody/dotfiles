@@ -12,7 +12,7 @@ init_plugin_manager = function()
 	--    :Lazy update
 	--
 	-- NOTE: Here is where you install your plugins.
-	require("lazy").setup({ { import = "plugins" } }, plugin_manager_config)
+	require("lazy").setup("plugins", plugin_manager_config)
 end
 
 return {

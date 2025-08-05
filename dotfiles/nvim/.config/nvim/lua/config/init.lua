@@ -9,6 +9,6 @@ return {
 		autocommands.setup_autocommands()
 	end,
 	setup_vim_options = vim_options.setup_vim_options,
-	setup_keymap = keymap.setup_vim_options,
+	setup_keymap = keymap.setup_keymap,
 	setup_autocommands = autocommands.setup_autocommands,
 }
