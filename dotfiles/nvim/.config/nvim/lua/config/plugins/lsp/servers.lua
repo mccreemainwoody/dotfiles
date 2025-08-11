@@ -29,6 +29,7 @@ local servers = {
     pyright = {},
     ruff = {},
     rust_analyzer = {},
+    stylua = {},
 }
 
 return {
