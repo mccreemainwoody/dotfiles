@@ -2,12 +2,23 @@
 
 source ~/.config/nushell/prompt/modules.nu
 
+
 # construct the left prompt
 def get_left_prompt [os color_mode] {
     let os_segment = (get_os_segment $os $color_mode)
     let path_segment = (get_path_segment $os $color_mode)
+    let git_segment = (get_git_branch_segment $color_mode)
     let indicator_segment = (get_indicator_segment $os $color_mode)
-    $os_segment + $path_segment + $indicator_segment
+
+    (
+        [
+            $os_segment
+            $path_segment
+            $git_segment
+            $indicator_segment
+            (char space)
+        ] | str join
+    )
 }
 
 # construct the right prompt
@@ -16,7 +27,14 @@ def get_right_prompt [os color_mode] {
     let execution_time_segment = (get_execution_time_segment $os $color_mode)
     let time_segment = (get_time_segment $os $color_mode)
     let exit_if = (if $env.LAST_EXIT_CODE != 0 { $status_segment })
-    [$exit_if $execution_time_segment $time_segment] | str join
+
+    (
+        [
+            $exit_if
+            $execution_time_segment
+            $time_segment
+        ] | str join
+    )
 }
 
 # constructe the left and right prompt by color_mode (8bit or 24bit)
@@ -35,6 +53,6 @@ def get_prompt [color_mode] {
     }
 }
 
-$env.PROMPT_COMMAND = { (get_prompt 8bit).left_prompt }
-$env.PROMPT_COMMAND_RIGHT = { (get_prompt 8bit).right_prompt }
+$env.PROMPT_COMMAND = { (get_prompt $color_mode).left_prompt }
+$env.PROMPT_COMMAND_RIGHT = { (get_prompt $color_mode).right_prompt }
 $env.PROMPT_INDICATOR = { "" }

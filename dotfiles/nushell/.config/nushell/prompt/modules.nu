@@ -67,6 +67,11 @@ def get_path_segment [os color_mode] {
     let pwd_bg_color = (get_color pwd_bg_color $color_mode)
     let pwd_color = (get_color pwd_color_dirs $color_mode)
     let home_or_folder = (if $is_home_in_path { (char nf_house1) } else { (char nf_folder1) })
+
+    let transition_icon = $left_prompt_separator_diff_color
+    let transition_bg_color = (get_color git_bg_color $color_mode)
+    let transition_color = (get_color pwd_bg_color $color_mode)
+
     let path_segment = (
         [
             $home_or_folder
@@ -75,10 +80,37 @@ def get_path_segment [os color_mode] {
             ($pwd_color)
             ($pwd_bg_color)
             (char space)                           # space
+            ($transition_color)
+            ($transition_bg_color)
+            ($transition_icon)
+            (char space)
         ] | str join
     )
 
     $path_segment
+}
+
+# get Git branch
+def get_git_branch_segment [color_mode] {
+    let git_branch_fg = (get_color git_color_branch $color_mode)
+    let git_branch_bg = (get_color git_bg_color $color_mode)
+    let git_icon = (char -u efa0)
+
+    let in_git_repo = (ls -a | where type == dir and name == .git | length) > 0
+    let git_branch = (git branch --show-current | complete | get stdout | head)
+
+    let git_branch_segment = (
+        [
+            ($git_branch_fg)
+            ($git_branch_bg)
+            $git_icon
+            (char space)
+            (if $in_git_repo { $git_branch} else "")
+            (char space)
+        ] | str join
+    )
+
+    $git_branch_segment
 }
 
 # get the indicator segment for the prompt
@@ -152,6 +184,8 @@ def get_execution_time_segment [os color_mode] {
     let cmd_dur_fg = (get_color cmd_duration_ms_color $color_mode)
     let cmd_dur_bg = (get_color cmd_duration_ms_bg_color $color_mode)
 
+    let cmd_duration_in_seconds = ($env.CMD_DURATION_MS | into int) / 1000
+
     let execution_time_segment = (
         [
             ($cmd_dur_fg)
@@ -159,7 +193,8 @@ def get_execution_time_segment [os color_mode] {
             # (ansi { fg: $cmd_dur_fg bg: $cmd_dur_bg })
             (char nf_right_segment_thin)
             (char space)
-            $env.CMD_DURATION_MS
+            ($cmd_duration_in_seconds)
+            "s"
             (char space)
             ($R)
         ] | str join

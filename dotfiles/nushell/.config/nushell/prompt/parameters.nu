@@ -146,9 +146,9 @@ const time_color = ""
 const time_format = ""
 
 # indicator
-const indicator_color_24 = (ansi -e { fg: "#3465a4" })
+const indicator_color_24 = (ansi -e { fg: "#4E9A06" })
 const indicator_bg_color_24 = (ansi -e { bg: "#000000" })
-const indicator_color_8 = $"(ansi idx_fg)61m"
+const indicator_color_8 = $"(ansi idx_fg)16m"
 const indicator_bg_color_8 = $"(ansi idx_bg)16m"
 
 # terminal background color
