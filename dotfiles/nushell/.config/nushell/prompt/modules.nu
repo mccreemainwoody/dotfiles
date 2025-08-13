@@ -41,6 +41,11 @@ def get_os_segment [os color_mode] {
     let os_bg_color = (get_color os_bg_color $color_mode)
     let os_color = (get_color os_color $color_mode)
     let os_icon = (get_os_icon $os)
+
+    let user = $env.USER
+    let hostname = (sys host).hostname
+    let user_information_display = ($user) + "@" + ($hostname)
+
     let transition_icon = $left_prompt_separator_diff_color
     let transition_bg_color = (get_color pwd_bg_color $color_mode)
     let transition_color = (get_color pwd_color_anchors $color_mode)
@@ -51,6 +56,8 @@ def get_os_segment [os color_mode] {
         ($os_bg_color)
         (char space)
         ($os_icon)
+        (char space)
+        ($user_information_display)
         (char space)
         ($transition_color)
         ($transition_bg_color)
