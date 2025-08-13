@@ -1,3 +1,5 @@
+#!/usr/bin/nu
+
 # Editor
 $env.config.buffer_editor = "nvim"
 

@@ -1,3 +1,5 @@
+#!/usr/bin/nu
+
 # Original source: https://github.com/nushell/nu_scripts/blob/main/modules/prompt/oh-my-v2.nu
 
 source ~/.config/nushell/prompt/modules.nu

@@ -1,3 +1,5 @@
+#!/usr/bin/nu
+
 source ~/.config/nushell/prompt/parameters.nu
 
 const runtime_colors = [

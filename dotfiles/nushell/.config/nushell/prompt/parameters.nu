@@ -1,3 +1,5 @@
+#!/usr/bin/nu
+
 # See the readme for how to use this script
 # modes
 # * 8bit
