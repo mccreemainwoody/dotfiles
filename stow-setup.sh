@@ -1,13 +1,19 @@
+#!/bin/sh
+
+set -e
+
 cd ./dotfiles
-stow --target ~ neofetch
-stow --target ~ fastfetch
-stow --target ~ bashrc
-stow --target ~ vimrc
-stow --target ~ git
-stow --target ~ kitty
-stow --target ~ nvim
-stow --target ~ waybar
-stow --target ~ hypr
+stow --target ~ \
+    bashrc \
+    fastfetch \
+    git \
+    hypr \
+    kitty \
+    neofetch \
+    nushell \
+    nvim \
+    vimrc \
+    waybar
 
 cd ../themes
 

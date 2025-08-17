@@ -5,7 +5,8 @@
     },
     "logo": {
         "padding": {
-            "top": 12
+            "top": 3,
+            "left": 2
         },
         "position": "left"
     },
@@ -20,58 +21,42 @@
             "type": 3,
             "ndigits": 2
         },
-	"bar": {
-	    "charElapsed": "■",
-	    "charTotal": "-",
-	    "borderLeft": "[",
-	    "borderRight": "]",
-	    "width": 8
-	}
+        "bar": {
+            "charElapsed": "■",
+            "charTotal": "-",
+            "borderLeft": "[",
+            "borderRight": "]",
+            "width": 8
+    }
     },
     "modules": [
         "title",
-        "separator",
+        {
+            "type": "separator",
+            "string": "~",
+            "length": 40
+        },
         "os",
         "host",
-	"chassis",
         "kernel",
-	"initsystem",
         "uptime",
         "separator",
-	"lm",
+        "lm",
         "wm",
-        "theme",
-        "icons",
-        "cursor",
-        "separator",
-	"shell",
+        "shell",
         "terminal",
-        "terminalfont",
-	"terminaltheme",
-	"font",
+        "font",
         "editor",
-        "version",
         "separator",
         "cpu",
         "gpu",
         "disk",
-        "memory",
-	"swap",
-	"brightness",
-	"sound",
         "battery",
+        "bluetooth",
         "separator",
-        "wifi",
-        "publicip",
-        "localip",
-	"dns",
-	"bluetooth",
-        "separator",
-        "locale",
-        "datetime",
         "weather",
-	"poweradapter",
-	"media",
+        "poweradapter",
+        "media",
         "break",
         "colors"
     ]
