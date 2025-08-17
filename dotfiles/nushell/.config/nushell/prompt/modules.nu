@@ -105,8 +105,9 @@ def get_git_branch_segment [color_mode] {
     let git_branch_bg = (get_color git_bg_color $color_mode)
     let git_icon = (char -u efa0)
 
-    let in_git_repo = (ls -a | where type == dir and name == .git | length) > 0
-    let git_branch = (git branch --show-current | complete | get stdout | head)
+    let git_status = (git branch --show-current | complete)
+    let in_git_repo = ($git_status | get exit_code) == 0
+    let git_branch = ($git_status | get stdout | head)
 
     let git_branch_segment = (
         [
