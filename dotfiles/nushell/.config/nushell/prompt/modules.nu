@@ -22,18 +22,53 @@ def home_abbrev [os_name] {
 
 # get the operating system icon for the prompt
 def get_os_icon [os] {
-    # f17c = tux, f179 = apple, f17a = windows
     if ($os.name =~ macos) {
-        (char -u f179)
+        return $icons_os_macos
     } else if ($os.name =~ windows) {
-        (char -u f17a)
+        return $icons_os_windows
     } else if ($os.kernel_version =~ WSL) {
-        $'(char -u f17a)(char -u f17c)'
+        return $icons_os_wsl
     } else if ($os.family =~ unix) {
-        (char -u f17c)
-    } else {
-        ''
+        return $icons_os_unix
     }
+
+    $icons_os_default
+}
+
+# get the main remote of the current Git repo (assuming the repo exists)
+def get_git_main_remote [] {
+    let remote_sources = (git remote | parse "{id}")
+
+    if (($remote_sources | where id == "origin" | length) < 1) {
+        "origin"
+    } else {
+        ($remote_sources | get 0 | get id)
+    }
+}
+
+# get the Git icon to display depending of the repo type
+def get_git_icon [in_git_repo] {
+    if (not $in_git_repo) {
+        return $icons_git_branch_none
+    }
+
+    let main_remote = (get_git_main_remote)
+
+    let remote_url = (git remote get-url $main_remote | complete | get stdout)
+
+    if ($remote_url | str contains "github.com") {
+        return $icons_git_branch_github
+    } else if ($remote_url | str contains "gitlab") {
+        return $icons_git_branch_gitlab
+    } else if ($remote_url | str contains "bitbucket") {
+        return $icons_git_branch_bitbucket
+    } else if ($remote_url | str contains "codecommit") {
+        return $icons_git_branch_codecommit
+    } else if ($remote_url | str contains "git.forge.epita.fr") {
+        return $icons_git_branch_epita
+    }
+
+    $icons_git_branch_default
 }
 
 # get the os segment for the prompt
@@ -101,22 +136,33 @@ def get_path_segment [os color_mode] {
 
 # get Git branch
 def get_git_branch_segment [color_mode] {
-    let git_branch_fg = (get_color git_color_branch $color_mode)
-    let git_branch_bg = (get_color git_bg_color $color_mode)
-    let git_icon = (char -u efa0)
+    mut git_information_content = []
 
-    let git_status = (git branch --show-current | complete)
-    let in_git_repo = ($git_status | get exit_code) == 0
-    let git_branch = ($git_status | get stdout | head)
+    if ((which git | length) == 1) {
+        let git_branch_fg = (get_color git_color_branch $color_mode)
+        let git_branch_bg = (get_color git_bg_color $color_mode)
+
+        let git_status = (git branch --show-current | complete)
+        let in_git_repo = ($git_status | get exit_code) == 0
+        let git_branch = ($git_status | get stdout | head)
+
+        let git_icon = (get_git_icon $in_git_repo)
+
+        if ($in_git_repo and ($git_icon != "")) {
+            $git_information_content = [
+                ($git_branch_fg)
+                ($git_branch_bg)
+                $git_icon
+                (char space)
+                $git_branch
+                (char space)
+            ]
+        }
+    }
 
     let git_branch_segment = (
         [
-            ($git_branch_fg)
-            ($git_branch_bg)
-            $git_icon
-            (char space)
-            (if $in_git_repo { $git_branch} else "")
-            (char space)
+            ...$git_information_content
         ] | str join
     )
 
@@ -152,7 +198,7 @@ def get_time_segment [os color_mode] {
         ($time_color)
         ($time_bg_color)
         (char space)
-        (date now | format date '%I:%M:%S %p')
+        (date now | format date '%H:%M:%S %p')
         (char space)
         ($R)
     ] | str join)

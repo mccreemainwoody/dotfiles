@@ -165,3 +165,17 @@ const cmd_duration_ms_color_8 = $"(ansi idx_fg)244m"
 const cmd_duration_ms_bg_color_24 = (ansi -e { fg: "#000000" })
 const cmd_duration_ms_bg_color_8 = (ansi black)
 
+# icons customization
+const icons_os_default = (char -u ea85)
+const icons_os_macos = (char -u f179)
+const icons_os_unix = (char -u f17c)
+const icons_os_windows = (char -u f17a)
+const icons_os_wsl = [$icons_os_windows " - " $icons_os_unix] | str join
+
+const icons_git_branch_bitbucket = (char -u f171)
+const icons_git_branch_codecommit = (char -u f0ef)
+const icons_git_branch_default = (char -u f126)
+const icons_git_branch_epita = (char -u f089b)
+const icons_git_branch_github = (char -u f09b)
+const icons_git_branch_gitlab = (char -u f296)
+const icons_git_branch_none = ""
