@@ -1,0 +1,16 @@
+/* ---------------- *
+ |                  |
+ |      Utils       |
+ |                  |
+ * ---------------- */
+
+label:focus {
+    background-color: #000000;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
