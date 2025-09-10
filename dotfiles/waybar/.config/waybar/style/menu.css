@@ -1,0 +1,15 @@
+/* ---------------- *
+ |                  |
+ |    Menu theme    |
+ |                  |
+ * ---------------- */
+
+menu {
+    background-color: @crust;
+    border-radius: 10px;
+}
+
+menuitem {
+    color: @text;
+    border-radius: 3px;
+}

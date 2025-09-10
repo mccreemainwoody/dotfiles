@@ -1,0 +1,173 @@
+/* ---------------- *
+ |                  |
+ |  Modules config  |
+ |                  |
+ * ---------------- */
+
+#battery {
+    background-color: @lavender;
+}
+
+#battery.charging,
+#battery.plugged {
+    background-color: @green;
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: @red;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#backlight {
+    background-color: @rosewater;
+}
+
+#bluetooth {
+    background-color: @mauve;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    background-color: @surface1;
+}
+
+#bluetooth.on {
+    background-color: @maroon;
+}
+
+#bluetooth.discovering,
+#bluetooth.discoverable,
+#bluetooth.pairable {
+    background-color: @sapphire;
+    color: @base;
+}
+
+#bluetooth.connected {
+    background-color: @teal;
+}
+
+#clock {
+    background-color: @overlay2;
+}
+
+#cpu {
+    background-color: @pink;
+}
+
+#disk {
+    background-color: @mauve;
+}
+
+#language {
+    background: @sapphire;
+    color: @base;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 20px;
+}
+
+#memory {
+    background-color: @blue;
+}
+
+#network {
+    background-color: @sky;
+}
+
+#network.disconnected {
+    background-color: @maroon;
+}
+
+#pulseaudio {
+    background-color: @yellow;
+}
+
+#pulseaudio:hover {
+    background-color: #a37800;
+}
+
+#pulseaudio.muted {
+    background-color: #90b1b1;
+    color: #2a5c45;
+}
+
+#temperature {
+    background-color: @peach;
+}
+
+#temperature.critical {
+    background-color: @red;
+}
+
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+#window {
+    color: @text;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    margin-right: 5px;
+    background-color: @rosewater;
+    opacity: 0.65;
+}
+
+#workspaces button:hover {
+    opacity: 0.8;
+}
+
+#workspaces button.active {
+    background-color: @lavender;
+    opacity: 0.9;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+.modules-left>widget:first-child>#workspaces {
+    margin-left: 5px;
+}
+
+.modules-right>widget:last-child>#workspaces {
+    margin-right: 0;
+}
+
+#custom-power {
+    background-color: @crust;
+    color: @text;
+}
+
+#custom-power:hover {
+    color: #ffffff;
+}
+
+#custom-updates {
+    background-color: @lavender;
+}
+
+#custom-updates .purple {
+    background-color: @mauve;
+}
+
+#custom-updates .red {
+    background-color: @red;
+}
+
+#custom-updates .yellow {
+    background-color: @yellow;
+}
+
+#custom-updates .green {
+    background-color: @green;
+}
