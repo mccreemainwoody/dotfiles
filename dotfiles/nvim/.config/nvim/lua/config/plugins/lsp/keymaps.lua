@@ -83,6 +83,8 @@ return {
             "[G]oto [T]ype Definition"
         )
 
+        map("grD", vim.lsp.buf.signature_help, "Display symbol [D]ocumentation")
+
         -- The following code creates a keymap to toggle inlay hints in your
         -- code, if the language server you are using supports them
         --

@@ -7,7 +7,9 @@ local formatters = {
     c = { "clang-format" },
     cpp = { "clang-format" },
     lua = { "stylua" },
+    markdown = { "markdown" },
     python = { "ruff" },
+    rustfmt = { "rust" },
 }
 
 return {
