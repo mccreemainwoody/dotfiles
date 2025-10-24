@@ -156,18 +156,18 @@
     background-color: @lavender;
 }
 
-#custom-updates .purple {
+#custom-updates.purple {
     background-color: @mauve;
 }
 
-#custom-updates .red {
+#custom-updates.red {
     background-color: @red;
 }
 
-#custom-updates .yellow {
+#custom-updates.yellow {
     background-color: @yellow;
 }
 
-#custom-updates .green {
+#custom-updates.green {
     background-color: @green;
 }
