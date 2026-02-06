@@ -171,3 +171,20 @@
 #custom-updates.green {
     background-color: @green;
 }
+
+#custom-virtual-keyboard {
+    background-color: @lavender;
+}
+
+#custom-virtual-keyboard.undefined {
+    background-color: @maroon;
+}
+
+#custom-virtual-keyboard.inactive {
+    background-color: @lavender;
+}
+
+#custom-virtual-keyboard.active {
+    background-color: @green;
+    border: white;
+}
