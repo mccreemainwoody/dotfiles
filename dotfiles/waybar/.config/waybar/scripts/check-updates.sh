@@ -19,16 +19,18 @@ throw_not_implemented_error() {
 source "$SCRIPT_DIR/detect-package-manager.sh"
 
 upgradable_packages=""
+upgradable_packages_formatted=""
 total_updates=0
 
 case "$PACKAGE_MANAGER" in
     'emerge')
         upgradable_packages=$(
-            eix --installed --upgrade --compact \
+            eix --world --upgrade --compact \
                 | grep "[U]" \
-                | grep -Eo "[a-zA-Z_-]+/[a-zA-Z_-]+"
+                | grep -Eo "[a-zA-Z_-]+/[a-zA-Z_-]+" \
+            || true
         )
-        total_updates=$(eix --installed --upgrade --compact | grep "[U]" | wc -l)
+        total_updates=$(eix --world --upgrade --compact | grep "[U]" | wc -l)
         ;;
     'pacman')  # Not implemented
         throw_not_implemented_error "pacman"
@@ -53,20 +55,26 @@ case "$PACKAGE_MANAGER" in
 esac
 
 
-css_class="green"
+css_class=""
 
-if [ "$total_updates" -ge 100 ]; then
+if [ "$total_updates" -ge 18 ]; then
     css_class="purple"
-elif [ "$total_updates" -ge 50 ]; then
+elif [ "$total_updates" -ge 12 ]; then
     css_class="red"
-elif [ "$total_updates" -ge 20 ]; then
+elif [ "$total_updates" -ge 7 ]; then
     css_class="yellow"
+elif [ "$total_updates" -ge 1 ]; then
+    css_class="green"
 fi
 
 
-upgradable_packages_formatted=$(
-    echo $upgradable_packages | sed "s/ /\\\\n/g"
-)
+if [ -n "$upgradable_packages" ]; then
+    upgradable_packages_formatted=$(
+        echo $upgradable_packages | sed "s/ /\\\\n/g"
+    )
+else
+    upgradable_packages_formatted="System is up to date! :D"
+fi
 
 printf \
     '{ "text": "%d", "alt": "%s", "class": "%s" }' \

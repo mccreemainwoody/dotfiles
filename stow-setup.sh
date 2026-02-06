@@ -22,6 +22,7 @@ stow --target ~ miku-cursor-linux
 
 cd ../wallpapers
 stow --target ~ hyprlock-bg
+stow --target ~ hyprpaper-bg
 
 cd ../../
 

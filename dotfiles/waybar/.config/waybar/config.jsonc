@@ -21,6 +21,7 @@
             "temperature",
             "backlight",
             "battery",
+            "custom/virtual-keyboard",
             "custom/power"
         ],
         "backlight": {
@@ -59,7 +60,7 @@
         "cpu": {
             "format": "{usage}% ",
             "tooltip": false,
-            "on-click": "kitty top --sort-override=\"%CPU\""
+            "on-click": "kitty btop"
         },
         "custom/power": {
             "format" : " ⏻ ",
@@ -82,13 +83,20 @@
             "restart-interval": 600,
             "on-click": "~/.config/waybar/scripts/start-updates.sh"
         },
+        "custom/virtual-keyboard": {
+            "format": " 󰌌 ",
+            "return-type": "json",
+            "exec": "~/.config/waybar/scripts/check-keyboard-state.sh",
+            "restart-interval": 3,
+            "on-click": "~/.config/waybar/scripts/toggle-keyboard.sh"
+        },
         "hyprland/language": {
             "format-en": "en",
             "format-fr": "fr"
         },
         "memory": {
             "format": "{}% ",
-            "on-click": "kitty top --sort-override=\"%MEM\""
+            "on-click": "kitty btop"
         },
         "network": {
             "format-wifi": "{essid} ({signalStrength}%) ",

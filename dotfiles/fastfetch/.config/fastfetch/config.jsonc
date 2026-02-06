@@ -56,7 +56,10 @@
         "battery",
         "bluetooth",
         "separator",
-        "weather",
+        {
+            "type": "weather",
+            "timeout": 300,
+        },
         "poweradapter",
         "media",
         "break",
