@@ -10,6 +10,6 @@
     };
 
     outputs = { self, nixpkgs, home-manager, ... } @_ : {
-        homeConfigurations.default = import ./home.nix;
+        homeConfigurations.default = ./modules/lib;
     };
 }
