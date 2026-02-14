@@ -2,22 +2,6 @@
 
 let
     cfg = config.home.my-dotfiles;
-
-    defaultFiles =
-        lib.filesystem.listFilesRecursives ../dotfiles/hypr/.config/hypr;
-
-    defaultConfig =
-        builtins.listToAttrs
-        map (name: { source = ../dotfiles/hypr/.config/hypr/${name} })
-        defaultFiles;
-
-    defaultOverrideStates = {
-        script = builtins.readFile
-            ./dotfiles/hypr/.config/hypr/hyprland/overrides.conf;
-
-        env-vars = builtins.readFile
-            ./dotfiles/hypr/.config/hypr/hyprland/overrides-env.conf;
-    };
 in
 {
     options = {
@@ -26,7 +10,8 @@ in
                 hyprland = {
                     extras = lib.mkOption {
                         type = lib.types.str;
-                        default = defaultOverrideStates.script;
+                        default = ''
+                        '';
                         example = ''
                             start-once = fcitx5 &
                         '';
@@ -41,7 +26,8 @@ in
 
                     extras-env = lib.mkOption {
                         type = lib.types.str;
-                        default = defaultOverrideStates.env-vars;
+                        default = ''
+                        '';
                         example = ''
                             $terminal = alacritty
 
@@ -64,17 +50,49 @@ in
         };
     };
 
-    config = lib.mkIf cfg.enable let
-        overrides = {
-            "hypr/hyprland/overrides.hypr".text = cfg.overrides.hyprland.extras;
-            "hypr/hyprland/overrides-env.hypr".text =
-                cfg.overrides.hyprland.extras-env;
+    config = lib.mkIf cfg.enable
+        {
+            home.activation = {
+                applyOverrides = lib.hm.dag.entryAfter
+                    [ "cloneDotfiles" ]
+                    ''
+                    #!/bin/sh
+
+                    hyprland_overrides_path="${config.xdg.configHome}/hypr/hyprland/overrides.conf"
+                    hyprland_overrides_env_path="${config.xdg.configHome}/hypr/hyprland/overrides-env.conf"
+
+                    hyprland_overrides_content="${cfg.overrides.hyprland.extras}"
+                    hyprland_overrides_env_content="${cfg.overrides.hyprland.extras-env}"
+
+
+                    dry_run() {
+                        echo "would write $hyprland_overrides_env_content to $hyprland_overrides_env_path"
+                        echo "would write $hyprland_overrides_content to $hyprland_overrides_path"
+                    }
+
+                    write_overrides() {
+                        echo \
+                            "$hyprland_overrides_env_content" \
+                            > "$hyprland_overrides_env_path"
+                        echo \
+                            "$hyprland_overrides_content" \
+                            > "$hyprland_overrides_path"
+                    }
+
+                    # if [ -n "$DRY_RUN" ]; then
+                    #     dry_run
+                    # else
+                    write_overrides
+                    # fi
+                    '';
+            };
+
+            xdg = {
+                enable = true;
+                configFile = {
+                    "hypr".source = config.lib.file.mkOutOfStoreSymlink
+                        "${config.home.homeDirectory}/dotfiles/dotfiles/hypr/.config/hypr";
+                };
+            };
         };
-    in
-    {
-        xdg = {
-            enable = true;
-            configFile = defaultFiles // overrides;
-        };
-    };
 }
