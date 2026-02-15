@@ -88,18 +88,17 @@ in
             };
 
             dataFile = {
-                "cursors/miku-cursor-linux" = {
-                    source = "${config.home.homeDirectory}/dotfiles/themes/cursors/miku-cursor-linux/.local/share";
-                    recursive = true;
+                "icons/miku-cursor-linux" = {
+                    source = ../../themes/cursors/miku-cursor-linux/.local/share/icons/miku-cursor-linux;
                 };
 
                 "wallpapers/hyprlock-bg" = {
-                    source = "${config.home.homeDirectory}/dotfiles/themes/wallpapers/hyprlock-bg/.local/share/wallpapers/hyprlock-bg";
+                    source = ../../themes/wallpapers/hyprlock-bg/.local/share/wallpapers/hyprlock-bg;
                     recursive = true;
                 };
 
                 "wallpapers/hyprpaper-bg" = {
-                    source = "${config.home.homeDirectory}/dotfiles/themes/wallpapers/hyprpaper-bg/.local/share/wallpapers/hyprpaper-bg";
+                    source = ../../themes/wallpapers/hyprpaper-bg/.local/share/wallpapers/hyprpaper-bg;
                     recursive = true;
                 };
             };
