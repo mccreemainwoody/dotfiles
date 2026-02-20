@@ -28,6 +28,7 @@ local servers = {
         },
     },
     markdownlint = {},
+    nil_ls = {},
     pyright = {},
     ruff = {},
     rust_analyzer = {},
