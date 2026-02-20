@@ -6,7 +6,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 source "$SCRIPT_DIR/detect-package-manager.sh"
 
-kitty_args=""
+kitty_args="--hold"
 command_to_run='echo'
 args='Package manager could not be found. Please write down the update command yourself!'
 
@@ -43,10 +43,6 @@ case "$PACKAGE_MANAGER" in
         args='apt update'
         ;;
 esac
-
-if [ "$command_to_run" == "echo" ]; then
-    kitty_args="--hold $kitty_args"
-fi
 
 kitty $kitty_args "$command_to_run" $args
 
