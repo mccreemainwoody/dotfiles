@@ -7,13 +7,13 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 throw_error() {
     message=$1
 
-    echo "$message"
+    echo "$message" 1>&2
 
     exit 1
 }
 
 throw_not_implemented_error() {
-    throw_error "package retrieving from $package_manager is not yet implemented" >2
+    throw_error "package retrieving from $PACKAGE_MANAGER is not yet implemented"
 }
 
 source "$SCRIPT_DIR/detect-package-manager.sh"
@@ -36,10 +36,11 @@ case "$PACKAGE_MANAGER" in
         throw_not_implemented_error "pacman"
         ;;
     'nixos')
-        throw_not_implemented_error "NixOS"
+        upgradable_packages="Not possible on NixOS"
+        total_updates=0
         ;;
     'home-manager')
-        throw_not_implemented_error "Nix home-manager"
+        throw_not_implemented_error "Nix Home Manager"
         ;;
     'nix')
         throw_not_implemented_error "Nix"
