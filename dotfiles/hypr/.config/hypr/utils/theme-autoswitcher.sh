@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 PERIOD_DURATION="$1"
 
