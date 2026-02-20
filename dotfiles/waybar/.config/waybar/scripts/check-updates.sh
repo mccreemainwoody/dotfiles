@@ -36,7 +36,8 @@ case "$PACKAGE_MANAGER" in
         throw_not_implemented_error "pacman"
         ;;
     'nixos')
-        throw_not_implemented_error "NixOS"
+        upgradable_packages="Not possible on NixOS"
+        total_updates=0
         ;;
     'home-manager')
         throw_not_implemented_error "Nix Home Manager"
