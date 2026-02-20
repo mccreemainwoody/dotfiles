@@ -20,8 +20,11 @@ case "$PACKAGE_MANAGER" in
         args='pacman -Su'
         ;;
     'nixos')
-        command_to_run='nixos-rebuild '
-        args='--switch'
+        # TODO: find a way to allow custom profile loading
+        # read -p "Please specify flake profile to use: " nixos_profile
+        nixos_profile="nixos-btw"
+        command_to_run='sudo'
+        args="nixos-rebuild switch --flake /etc/nixos#$nixos_profile"
         ;;
     'home-manager')
         command_to_run='home-manager'
