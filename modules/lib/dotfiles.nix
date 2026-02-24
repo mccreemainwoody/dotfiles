@@ -15,14 +15,13 @@ in
                 description = "Enable dotfiles loading into home.";
             };
 
-            dotfilesLocalPath = rec {
+            dotfilesLocalPath = lib.mkOption (rec {
                 type = lib.types.path;
                 default = "${config.home.homeDirectory}/dotfiles";
                 example = default;
                 description = "Path at which to store the dotfiles locally";
-            };
+            });
         };
-
     };
 
     config = lib.mkIf cfg.enable {
@@ -38,13 +37,7 @@ in
 
                     dotfiles_installation_path="${cfg.dotfilesLocalPath}"
 
-                    if [ -d "$dotfiles_installation_path" ]; then
-                        cd "$dotfiles_installation_path"
-                        run --quiet git stash
-                        run --quiet git pull
-                        run --quiet git stash pop || true
-                        cd -
-                    else
+                    if [ ! -d "$dotfiles_installation_path" ]; then
                         run \
                             git clone \
                             https://github.com/mccreemainwoody/dotfiles.git \
@@ -57,13 +50,13 @@ in
 
             file = {
                 ".bashrc".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/bashrc/.bashrc";
+                    "${cfg.dotfilesLocalPath}/dotfiles/bashrc/.bashrc";
 
                 ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/git/.gitconfig";
+                    "${cfg.dotfilesLocalPath}/dotfiles/git/.gitconfig";
 
                 ".vimrc".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/vimrc/.vimrc";
+                    "${cfg.dotfilesLocalPath}/dotfiles/vimrc/.vimrc";
             };
         };
 
@@ -74,13 +67,13 @@ in
 
             configFile = {
                 "fastfetch".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/fastfetch/.config/fastfetch";
+                    "${cfg.dotfilesLocalPath}/dotfiles/fastfetch/.config/fastfetch";
 
                 "kitty".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/kitty/.config/kitty";
+                    "${cfg.dotfilesLocalPath}/dotfiles/kitty/.config/kitty";
 
                 "neofetch".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/neofetch/.config/neofetch";
+                    "${cfg.dotfilesLocalPath}/dotfiles/neofetch/.config/neofetch";
 
                 "nushell" = {
                     # FIXME: fix the "error installing file outside $HOME"
@@ -89,10 +82,10 @@ in
                 };
 
                 "nvim".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/nvim/.config/nvim";
+                    "${cfg.dotfilesLocalPath}/dotfiles/nvim/.config/nvim";
 
                 "waybar".source = config.lib.file.mkOutOfStoreSymlink
-                    "${config.home.homeDirectory}/dotfiles/dotfiles/waybar/.config/waybar";
+                    "${cfg.dotfilesLocalPath}/dotfiles/waybar/.config/waybar";
             };
 
             dataFile = {
