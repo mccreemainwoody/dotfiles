@@ -14,7 +14,15 @@ in
                 example = true;
                 description = "Enable dotfiles loading into home.";
             };
+
+            dotfilesLocalPath = rec {
+                type = lib.types.path;
+                default = "${config.home.homeDirectory}/dotfiles";
+                example = default;
+                description = "Path at which to store the dotfiles locally";
+            };
         };
+
     };
 
     config = lib.mkIf cfg.enable {
@@ -28,7 +36,7 @@ in
                     OLD_PATH="$PATH"
                     PATH="${lib.makeBinPath [ pkgs.git ]}:$PATH"
 
-                    dotfiles_installation_path="${config.home.homeDirectory}/dotfiles"
+                    dotfiles_installation_path="${cfg.dotfilesLocalPath}"
 
                     if [ -d "$dotfiles_installation_path" ]; then
                         cd "$dotfiles_installation_path"
