@@ -13,6 +13,7 @@ return {
                         lsp_format = "fallback",
                     }
             end,
+            formatters = require("config.plugins.formatters.types").get_formatters(),
             formatters_by_ft = require("config.plugins.formatters.formatters").get_formatters(),
         }
     end,

@@ -8,6 +8,7 @@ local formatters = {
     cpp = { "clang-format" },
     lua = { "stylua" },
     markdown = { "markdown" },
+    nix = { "nix", "nixfmt", "alejandra", stop_after_first = true },
     python = { "ruff" },
     rustfmt = { "rust" },
 }
