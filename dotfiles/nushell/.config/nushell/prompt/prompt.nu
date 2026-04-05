@@ -10,6 +10,7 @@ def get_left_prompt [os color_mode] {
     let os_segment = (get_os_segment $os $color_mode)
     let path_segment = (get_path_segment $os $color_mode)
     let git_segment = (get_git_branch_segment $color_mode)
+    let nix_segment = (get_nix_segment $color_mode)
     let indicator_segment = (get_indicator_segment $os $color_mode)
 
     (
@@ -17,6 +18,7 @@ def get_left_prompt [os color_mode] {
             $os_segment
             $path_segment
             $git_segment
+            $nix_segment
             $indicator_segment
             (char space)
         ] | str join

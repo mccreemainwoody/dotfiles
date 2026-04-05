@@ -34,6 +34,10 @@ const runtime_colors = [
     { name: os_bg_color, '8bit': $os_bg_color_8, '24bit': $os_bg_color_24 },
     { name: os_color, '8bit': $os_color_8, '24bit': $os_color_24 },
 
+    { name: nix_color, '8bit': $nix_color_8, '24bit': $nix_color_24 },
+    { name: nix_bg_color, '8bit': $nix_bg_color_8, '24bit': $nix_bg_color_24 },
+    { name: nix_icon, '8bit': $icons_nix, '24bit': $icons_nix },
+
     { name: pwd_bg_color, '8bit': $pwd_bg_color_8, '24bit': $pwd_bg_color_24 },
     { name: pwd_color_anchors, '8bit': $pwd_color_anchors_8, '24bit': $pwd_color_anchors_24 },
     { name: pwd_color_dirs, '8bit': $pwd_color_dirs_8, '24bit': $pwd_color_dirs_24 },

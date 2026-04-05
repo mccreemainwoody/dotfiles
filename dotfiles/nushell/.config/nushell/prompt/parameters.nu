@@ -165,6 +165,12 @@ const cmd_duration_ms_color_8 = $"(ansi idx_fg)244m"
 const cmd_duration_ms_bg_color_24 = (ansi -e { fg: "#000000" })
 const cmd_duration_ms_bg_color_8 = (ansi black)
 
+# nix
+const nix_bg_color_24 = (ansi -e { fg: "#000000" })
+const nix_bg_color_8 = (ansi black)
+const nix_color_24 = (ansi -e { bg: "#4D6FB7" })
+const nix_color_8 = (ansi white)
+
 # icons customization
 const icons_os_default = (char -u ea85)
 const icons_os_macos = (char -u f179)
@@ -179,3 +185,5 @@ const icons_git_branch_epita = (char -u f089b)
 const icons_git_branch_github = (char -u f09b)
 const icons_git_branch_gitlab = (char -u f296)
 const icons_git_branch_none = ""
+
+const icons_nix = (char -u f1105)

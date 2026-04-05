@@ -169,6 +169,39 @@ def get_git_branch_segment [color_mode] {
     $git_branch_segment
 }
 
+def get_nix_segment [color_mode] {
+    mut nix_segment_content = []
+
+   let nix_icon_fg = (get_color nix_color $color_mode) 
+   let nix_icon_bg = (get_color nix_bg_color $color_mode) 
+   let nix_icon = (get_color nix_icon $color_mode)
+
+    let $in_nix_shell = (
+        $env |
+        columns |
+        where $it == "IN_NIX_SHELL" |
+        length |
+        into bool
+    )
+
+   if ($in_nix_shell) {
+        $nix_segment_content = [
+            ($nix_icon_fg)
+            ($nix_icon_bg)
+            $nix_icon
+            (char space)
+        ]
+   }
+
+    let nix_segment = (
+        [
+            ...$nix_segment_content
+        ] | str join
+    )
+
+    $nix_segment
+}
+
 # get the indicator segment for the prompt
 def get_indicator_segment [os color_mode] {
     let R = (ansi reset)
