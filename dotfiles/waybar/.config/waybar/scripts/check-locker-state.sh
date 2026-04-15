@@ -5,7 +5,6 @@ LOCKER_FILE="/tmp/.locker-state"
 RETURN_FORMAT='{ "text": "%s", "alt": "%s", "class": "%s" }'
 
 return_json() {
-    printf "$RETURN_FORMAT" "$1" "$2" "$3" &1>2
     printf "$RETURN_FORMAT" "$1" "$2" "$3"
 }
 
