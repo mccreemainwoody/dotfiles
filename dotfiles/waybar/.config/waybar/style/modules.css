@@ -143,6 +143,22 @@
     margin-right: 0;
 }
 
+#custom-locker {
+    background-color: @crust;
+}
+
+#custom-locker.purple {
+    background-color: @mauve;
+}
+
+#custom-locker.red {
+    background-color: @red;
+}
+
+#custom-locker.green {
+    background-color: @green;
+}
+
 #custom-power {
     background-color: @crust;
     color: @text;

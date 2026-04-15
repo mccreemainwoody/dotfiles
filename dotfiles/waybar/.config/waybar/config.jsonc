@@ -22,11 +22,18 @@
             "backlight",
             "battery",
             "custom/virtual-keyboard",
+            "custom/locker",
             "custom/power"
         ],
         "backlight": {
             "format": "{percent}% {icon}",
-            "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
+            "format-icons": [
+                "🌑",
+                "🌘",
+                "🌗",
+                "🌖",
+                "🌕"
+            ],
             "on-scroll-up": "brightnessctl set +1%",
             "on-scroll-down": "brightnessctl  set 1%-"
         },
@@ -41,7 +48,13 @@
             "format-charging": "{capacity}% ",
             "format-plugged": "{capacity}% ",
             "format-alt": "{time} {icon}",
-            "format-icons": ["", "", "", "", ""]
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
         },
         "battery#bat2": {
             "bat": "BAT2"
@@ -64,8 +77,15 @@
             "tooltip": false,
             "on-click": "kitty btop"
         },
+        "custom/locker": {
+            "format": "{text}",
+            "return-type": "json",
+            "exec": "~/.config/waybar/scripts/check-locker-state.sh",
+            "restart-interval": 1,
+            "on-click": "~/.config/waybar/scripts/switch-locker-state.sh"
+        },
         "custom/power": {
-            "format" : " ⏻ ",
+            "format": " ⏻ ",
             "tooltip": false,
             "menu": "on-click",
             "menu-file": "$HOME/.config/waybar/components/power_menu.xml",
@@ -123,7 +143,11 @@
                 "phone": "",
                 "portable": "",
                 "car": "",
-                "default": ["", "", ""]
+                "default": [
+                    "",
+                    "",
+                    ""
+                ]
             },
             "scroll-step": 1,
             "on-click": "pavucontrol"
@@ -131,14 +155,20 @@
         "temperature": {
             "critical-threshold": 80,
             "format": "{temperatureC}°C {icon}",
-            "format-icons": ["", "", ""]
+            "format-icons": [
+                "",
+                "",
+                ""
+            ]
         }
     },
     {
         "layer": "top",
         "position": "bottom",
         "height": 30,
-        "modules-left": ["hyprland/workspaces"],
+        "modules-left": [
+            "hyprland/workspaces"
+        ],
         "modules-middle": [],
         "modules-right": [],
         "hyprland/workspaces": {
