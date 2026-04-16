@@ -1,3 +1,3 @@
 {
-    imports = [ ./dotfiles.nix ];
+  imports = [./dotfiles.nix];
 }

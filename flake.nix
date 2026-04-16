@@ -1,18 +1,30 @@
 {
-    description = "Nix Home-Manager configuration for dotfiles";
+  description = "Nix Home-Manager configuration for dotfiles";
 
-    inputs = {
-        nixpkgs.url = "nixpkgs/nixos-unstable";
-        home-manager = {
-            url = "github:nix-community/home-manager";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils.url = "github:numtide/flake-utils";
+  };
 
-    outputs = { self, nixpkgs, home-manager, ... } @_ : {
-        homeModules = rec {
-            default = dotfiles;
-            dotfiles = import ./modules/lib;
-        };
-    };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    ...
+  } @ _:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      formatter = pkgs.alejandra;
+
+      homeModules = rec {
+        default = dotfiles;
+        dotfiles = import ./modules/lib;
+      };
+    });
 }

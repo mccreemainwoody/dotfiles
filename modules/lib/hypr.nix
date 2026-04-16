@@ -1,116 +1,120 @@
-{ config, lib, ... }:
-
-let
-    inherit (config.home.my-dotfiles) dotfilesLocalPath;
-    cfg = config.home.my-dotfiles;
-in
 {
-    options = {
-        home.my-dotfiles = {
-            overrides = {
-                hyprland = {
-                    extras = lib.mkOption {
-                        type = lib.types.str;
-                        default = ''
-                        '';
-                        example = ''
-                            start-once = fcitx5 &
-                        '';
-                        description = ''
-                            Extra Hyprland instruction to run during Hyprland
-                            session.
+  config,
+  lib,
+  ...
+}: let
+  inherit (config.home.my-dotfiles) dotfilesLocalPath;
+  cfg = config.home.my-dotfiles;
+in {
+  options = {
+    home.my-dotfiles = {
+      overrides = {
+        hyprland = {
+          extras = lib.mkOption {
+            type = lib.types.str;
+            default = ''
+            '';
+            example = ''
+              start-once = fcitx5 &
+            '';
+            description = ''
+              Extra Hyprland instruction to run during Hyprland
+              session.
 
-                            Those instructions will be run after all default
-                            instructions, leading to possible overrides.
-                        '';
-                    };
+              Those instructions will be run after all default
+              instructions, leading to possible overrides.
+            '';
+          };
 
-                    extras-env = lib.mkOption {
-                        type = lib.types.str;
-                        default = ''
-                        '';
-                        example = ''
-                            $terminal = alacritty
+          extras-env = lib.mkOption {
+            type = lib.types.str;
+            default = ''
+            '';
+            example = ''
+              $terminal = alacritty
 
-                            env = XCURSOR_SIZE,12
-                        '';
-                        description = ''
-                            Extra Hyprland instructions to run during Hyprland
-                            session.
+              env = XCURSOR_SIZE,12
+            '';
+            description = ''
+              Extra Hyprland instructions to run during Hyprland
+              session.
 
-                            Those instructions will be after configuration of
-                            default variables and before running all the other
-                            instructions of the environment setup.
+              Those instructions will be after configuration of
+              default variables and before running all the other
+              instructions of the environment setup.
 
-                            Use this to add/override environment variables and
-                            change your default terminal, GTK theme...
-                        '';
-                    };
-                };
-            };
+              Use this to add/override environment variables and
+              change your default terminal, GTK theme...
+            '';
+          };
         };
+      };
     };
+  };
 
-    config = lib.mkIf cfg.enable
-        {
-            home.activation = {
-                applyOverrides = lib.hm.dag.entryAfter
-                    [ "cloneDotfiles" ]
-                    ''
-                    #!/bin/sh
+  config =
+    lib.mkIf cfg.enable
+    {
+      home.activation = {
+        applyOverrides =
+          lib.hm.dag.entryAfter
+          ["cloneDotfiles"]
+          ''
+            #!/bin/sh
 
-                    hyprland_overrides_path="${config.xdg.configHome}/hypr/hyprland/overrides.conf"
-                    hyprland_overrides_env_path="${config.xdg.configHome}/hypr/hyprland/overrides-env.conf"
+            hyprland_overrides_path="${config.xdg.configHome}/hypr/hyprland/overrides.conf"
+            hyprland_overrides_env_path="${config.xdg.configHome}/hypr/hyprland/overrides-env.conf"
 
-                    hyprland_overrides_content="${cfg.overrides.hyprland.extras}"
-                    hyprland_overrides_env_content="${cfg.overrides.hyprland.extras-env}"
+            hyprland_overrides_content="${cfg.overrides.hyprland.extras}"
+            hyprland_overrides_env_content="${cfg.overrides.hyprland.extras-env}"
 
 
-                    dry_run() {
-                        echo "would write $hyprland_overrides_env_content to $hyprland_overrides_env_path"
-                        echo "would write $hyprland_overrides_content to $hyprland_overrides_path"
-                    }
+            dry_run() {
+                echo "would write $hyprland_overrides_env_content to $hyprland_overrides_env_path"
+                echo "would write $hyprland_overrides_content to $hyprland_overrides_path"
+            }
 
-                    write_overrides() {
-                        echo \
-                            "$hyprland_overrides_env_content" \
-                            > "$hyprland_overrides_env_path"
-                        echo \
-                            "$hyprland_overrides_content" \
-                            > "$hyprland_overrides_path"
-                    }
+            write_overrides() {
+                echo \
+                    "$hyprland_overrides_env_content" \
+                    > "$hyprland_overrides_env_path"
+                echo \
+                    "$hyprland_overrides_content" \
+                    > "$hyprland_overrides_path"
+            }
 
-                    # if [ -n "$DRY_RUN" ]; then
-                    #     dry_run
-                    # else
-                    write_overrides
-                    # fi
-                    '';
-            };
+            # if [ -n "$DRY_RUN" ]; then
+            #     dry_run
+            # else
+            write_overrides
+            # fi
+          '';
+      };
 
-            xdg = {
-                enable = true;
+      xdg = {
+        enable = true;
 
-                configFile = {
-                    "hypr".source = config.lib.file.mkOutOfStoreSymlink
-                        "${dotfilesLocalPath}/dotfiles/hypr/.config/hypr";
-                };
-
-                dataFile = {
-                    "icons/miku-cursor-linux" = {
-                        source = ../../themes/cursors/miku-cursor-linux/.local/share/icons/miku-cursor-linux;
-                    };
-
-                    "wallpapers/hyprlock-bg" = {
-                        source = ../../themes/wallpapers/hyprlock-bg/.local/share/wallpapers/hyprlock-bg;
-                        recursive = true;
-                    };
-
-                    "wallpapers/hyprpaper-bg" = {
-                        source = ../../themes/wallpapers/hyprpaper-bg/.local/share/wallpapers/hyprpaper-bg;
-                        recursive = true;
-                    };
-                };
-            };
+        configFile = {
+          "hypr".source =
+            config.lib.file.mkOutOfStoreSymlink
+            "${dotfilesLocalPath}/dotfiles/hypr/.config/hypr";
         };
+
+        dataFile = {
+          "icons/miku-cursor-linux" = {
+            source = ../../themes/cursors/miku-cursor-linux/.local/share/icons/miku-cursor-linux;
+          };
+
+          "wallpapers/hyprlock-bg" = {
+            source = ../../themes/wallpapers/hyprlock-bg/.local/share/wallpapers/hyprlock-bg;
+            recursive = true;
+          };
+
+          "wallpapers/hyprpaper-bg" = {
+            source = ../../themes/wallpapers/hyprpaper-bg/.local/share/wallpapers/hyprpaper-bg;
+            recursive = true;
+          };
+        };
+      };
+    };
 }
