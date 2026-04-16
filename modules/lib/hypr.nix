@@ -1,6 +1,7 @@
 { config, lib, ... }:
 
 let
+    inherit (config.home.my-dotfiles) dotfilesLocalPath;
     cfg = config.home.my-dotfiles;
 in
 {
@@ -89,9 +90,26 @@ in
 
             xdg = {
                 enable = true;
+
                 configFile = {
                     "hypr".source = config.lib.file.mkOutOfStoreSymlink
-                        "${config.home.homeDirectory}/dotfiles/dotfiles/hypr/.config/hypr";
+                        "${dotfilesLocalPath}/dotfiles/hypr/.config/hypr";
+                };
+
+                dataFile = {
+                    "icons/miku-cursor-linux" = {
+                        source = ../../themes/cursors/miku-cursor-linux/.local/share/icons/miku-cursor-linux;
+                    };
+
+                    "wallpapers/hyprlock-bg" = {
+                        source = ../../themes/wallpapers/hyprlock-bg/.local/share/wallpapers/hyprlock-bg;
+                        recursive = true;
+                    };
+
+                    "wallpapers/hyprpaper-bg" = {
+                        source = ../../themes/wallpapers/hyprpaper-bg/.local/share/wallpapers/hyprpaper-bg;
+                        recursive = true;
+                    };
                 };
             };
         };

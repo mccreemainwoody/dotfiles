@@ -4,7 +4,18 @@ let
     cfg = config.home.my-dotfiles;
 in
 {
-    imports = [ ./hypr.nix ];
+    imports = [
+        ./bashrc.nix
+        ./fastfetch.nix
+        ./git.nix
+        ./hypr.nix
+        ./kitty.nix
+        ./neofetch.nix
+        ./neovim.nix
+        ./nushell.nix
+        ./vimrc.nix
+        ./waybar.nix
+    ];
 
     options = {
         home.my-dotfiles = {
@@ -46,62 +57,6 @@ in
 
                     PATH="$OLD_PATH"
                     '';
-            };
-
-            file = {
-                ".bashrc".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/bashrc/.bashrc";
-
-                ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/git/.gitconfig";
-
-                ".vimrc".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/vimrc/.vimrc";
-            };
-        };
-
-        programs.git.enable = true;
-
-        xdg = {
-            enable = true;
-
-            configFile = {
-                "fastfetch".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/fastfetch/.config/fastfetch";
-
-                "kitty".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/kitty/.config/kitty";
-
-                "neofetch".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/neofetch/.config/neofetch";
-
-                "nushell" = {
-                    # FIXME: fix the "error installing file outside $HOME"
-                    source = ../../dotfiles/nushell/.config/nushell;
-                    recursive = true;
-                };
-
-                "nvim".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/nvim/.config/nvim";
-
-                "waybar".source = config.lib.file.mkOutOfStoreSymlink
-                    "${cfg.dotfilesLocalPath}/dotfiles/waybar/.config/waybar";
-            };
-
-            dataFile = {
-                "icons/miku-cursor-linux" = {
-                    source = ../../themes/cursors/miku-cursor-linux/.local/share/icons/miku-cursor-linux;
-                };
-
-                "wallpapers/hyprlock-bg" = {
-                    source = ../../themes/wallpapers/hyprlock-bg/.local/share/wallpapers/hyprlock-bg;
-                    recursive = true;
-                };
-
-                "wallpapers/hyprpaper-bg" = {
-                    source = ../../themes/wallpapers/hyprpaper-bg/.local/share/wallpapers/hyprpaper-bg;
-                    recursive = true;
-                };
             };
         };
     };
