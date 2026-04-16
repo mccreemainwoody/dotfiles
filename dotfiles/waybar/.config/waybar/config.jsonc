@@ -23,6 +23,7 @@
             "battery",
             "custom/virtual-keyboard",
             "custom/locker",
+            "custom/focus-mode",
             "custom/power"
         ],
         "backlight": {
@@ -77,8 +78,17 @@
             "tooltip": false,
             "on-click": "kitty btop"
         },
+        "custom/focus-mode": {
+            "format": "{text}",
+            "tooltip-format": "{alt}",
+            "return-type": "json",
+            "exec": "~/.config/waybar/scripts/check-focus-mode-state.sh",
+            "restart-interval": 1,
+            "on-click": "~/.config/waybar/scripts/switch-focus-mode-state.sh"
+        },
         "custom/locker": {
             "format": "{text}",
+            "tooltip-format": "{alt}",
             "return-type": "json",
             "exec": "~/.config/waybar/scripts/check-locker-state.sh",
             "restart-interval": 1,

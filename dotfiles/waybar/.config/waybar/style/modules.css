@@ -143,12 +143,20 @@
     margin-right: 0;
 }
 
-#custom-locker {
+#custom-locker, #custom-focus-mode {
     background-color: @crust;
 }
 
-#custom-locker.purple {
+#custom-locker.purple, #custom-focus-mode.unknown {
     background-color: @mauve;
+}
+
+#custom-focus-mode.inactive {
+    background-color: @lavender;
+}
+
+#custom-focus-mode.active {
+    background-color: @yellow;
 }
 
 #custom-locker.red {
