@@ -46,6 +46,7 @@ const cmd_icon = ""
 
 # git
 const git_bg_color_24 = (ansi -e { bg: "#4E9A06" })
+const git_transition_color_24 = (ansi -e { fg: "#4E9A06" })
 const git_bg_color_unstable_24 = (ansi -e { bg: "#C4A000" })
 const git_bg_color_urgent_24 = (ansi -e { bg: "#CC0000" })
 const git_color_branch_24 = (ansi -e { fg: "#000000" })
@@ -58,6 +59,7 @@ const git_color_untracked_24 = (ansi -e { fg: "#000000" })
 const git_color_upstream_24 = (ansi -e { fg: "#000000" })
 
 const git_bg_color_8 = $"(ansi idx_bg)70m"
+const git_transition_color_8 = $"(ansi idx_fg)70m"
 const git_bg_color_unstable_8 = $"(ansi idx_bg)178m"
 const git_bg_color_urgent_8 = $"(ansi idx_bg)160m"
 const git_color_branch_8 = $"(ansi idx_fg)16m"
@@ -83,19 +85,23 @@ const git_color_upstream = ""
 
 # os
 const os_bg_color_24 = (ansi -e { bg: "#CED7CF" })
+const os_transition_color_24 = (ansi -e { fg: "#CED7CF" })
 const os_color_24 = (ansi -e { fg: "#080808" })
 const os_bg_color_8 = $"(ansi idx_bg)188m"
+const os_transition_color_8 = $"(ansi idx_fg)188m"
 const os_color_8 = $"(ansi idx_fg)232m"
 const os_bg_color = ""
 const os_color = ""
 
 # pwd
 const pwd_bg_color_24 = (ansi -e { bg: "#3465A4" })
+const pwd_transition_color_24 = (ansi -e { fg: "#3465A4" })
 const pwd_color_anchors_24 = (ansi -e { fg: "#E4E4E4" })
 const pwd_color_dirs_24 = (ansi -e { fg: "#E4E4E4" })
 const pwd_color_truncated_dirs_24 = (ansi -e { fg: "#BCBCBC" })
 
 const pwd_bg_color_8 = $"(ansi idx_bg)61m"
+const pwd_transition_color_8 = $"(ansi idx_fg)61m"
 const pwd_color_anchors_8 = $"(ansi idx_fg)254m"
 const pwd_color_dirs_8 = $"(ansi idx_fg)254m"
 const pwd_color_truncated_dirs_8 = $"(ansi idx_fg)250m"

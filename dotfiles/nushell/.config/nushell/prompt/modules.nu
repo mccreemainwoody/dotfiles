@@ -83,7 +83,7 @@ def get_os_segment [os color_mode] {
 
     let transition_icon = $left_prompt_separator_diff_color
     let transition_bg_color = (get_color pwd_bg_color $color_mode)
-    let transition_color = (get_color pwd_color_anchors $color_mode)
+    let transition_color = (get_color os_transition_color $color_mode)
 
     let os_segment = (
     [
@@ -114,7 +114,7 @@ def get_path_segment [os color_mode] {
 
     let transition_icon = $left_prompt_separator_diff_color
     let transition_bg_color = (get_color git_bg_color $color_mode)
-    let transition_color = (get_color pwd_bg_color $color_mode)
+    let transition_color = (get_color pwd_transition_color $color_mode)
 
     let path_segment = (
         [
@@ -176,13 +176,13 @@ def get_nix_segment [color_mode] {
    let nix_icon_bg = (get_color nix_bg_color $color_mode) 
    let nix_icon = (get_color nix_icon $color_mode)
 
-    let $in_nix_shell = (
-        $env |
-        columns |
-        where $it == "IN_NIX_SHELL" |
-        length |
-        into bool
-    )
+   let $in_nix_shell = (
+       $env |
+       columns |
+       where $it == "IN_NIX_SHELL" |
+       length |
+       into bool
+   )
 
    if ($in_nix_shell) {
         $nix_segment_content = [
@@ -206,11 +206,12 @@ def get_nix_segment [color_mode] {
 def get_indicator_segment [os color_mode] {
     let R = (ansi reset)
     let indicator_color = (get_color indicator_color $color_mode)
-    let indicator_bg_color = (get_color indicator_bg_color $color_mode)
+    # we aren't using any background for now
+    # let indicator_bg_color = (get_color indicator_bg_color $color_mode)
     let indicator_segment = (
         [
+        ($R)                                   # reset color
         ($indicator_color)
-        ($indicator_bg_color)
         (char nf_segment)                         # 
         ($R)                                   # reset color
         ] | str join

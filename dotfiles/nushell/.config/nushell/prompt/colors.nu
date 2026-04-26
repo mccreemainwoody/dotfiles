@@ -22,6 +22,7 @@ const runtime_colors = [
     { name: git_bg_color, '8bit': $git_bg_color_8, '24bit': $git_bg_color_24 },
     { name: git_bg_color_unstable, '8bit': $git_bg_color_unstable_8, '24bit': $git_bg_color_unstable_24 },
     { name: git_bg_color_urgent, '8bit': $git_bg_color_urgent_8 , '24bit': $git_bg_color_urgent_24 },
+    { name: git_transition_color, '8bit': $git_transition_color_8, '24bit': $git_transition_color_24 },
     { name: git_color_branch, '8bit': $git_color_branch_8, '24bit': $git_color_branch_24 },
     { name: git_color_conflicted, '8bit': $git_color_conflicted_8, '24bit': $git_color_conflicted_24 },
     { name: git_color_dirty, '8bit': $git_color_dirty_8, '24bit': $git_color_dirty_24 },
@@ -32,6 +33,7 @@ const runtime_colors = [
     { name: git_color_upstream, '8bit': $git_color_upstream_8, '24bit': $git_color_upstream_24 },
 
     { name: os_bg_color, '8bit': $os_bg_color_8, '24bit': $os_bg_color_24 },
+    { name: os_transition_color, '8bit': $os_transition_color_8, '24bit': $os_transition_color_24 },
     { name: os_color, '8bit': $os_color_8, '24bit': $os_color_24 },
 
     { name: nix_color, '8bit': $nix_color_8, '24bit': $nix_color_24 },
@@ -39,6 +41,7 @@ const runtime_colors = [
     { name: nix_icon, '8bit': $icons_nix, '24bit': $icons_nix },
 
     { name: pwd_bg_color, '8bit': $pwd_bg_color_8, '24bit': $pwd_bg_color_24 },
+    { name: pwd_transition_color, '8bit': $pwd_transition_color_8, '24bit': $pwd_transition_color_24 },
     { name: pwd_color_anchors, '8bit': $pwd_color_anchors_8, '24bit': $pwd_color_anchors_24 },
     { name: pwd_color_dirs, '8bit': $pwd_color_dirs_8, '24bit': $pwd_color_dirs_24 },
     { name: pwd_color_truncated_dirs, '8bit': $pwd_color_truncated_dirs_8, '24bit': $pwd_color_truncated_dirs_24 },
