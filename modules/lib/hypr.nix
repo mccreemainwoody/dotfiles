@@ -4,10 +4,17 @@
   ...
 }: let
   inherit (config.home.my-dotfiles) dotfilesLocalPath;
-  cfg = config.home.my-dotfiles;
+  cfg = config.home.my-dotfiles.packages.hypr;
 in {
   options = {
-    home.my-dotfiles = {
+    home.my-dotfiles.packages.hypr = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        example = true;
+        description = "Enable dotfiles for the hypr environment";
+      };
+
       overrides = {
         hyprland = {
           extras = lib.mkOption {
