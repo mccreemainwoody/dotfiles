@@ -22,11 +22,9 @@ in {
     xdg = {
       enable = true;
 
-      configFile."nushell" = {
-        # FIXME: fix the "error installing file outside $HOME"
-        source = ../../dotfiles/nushell/.config/nushell;
-        recursive = true;
-      };
+      configFile."nushell".source =
+        config.lib.file.mkOutOfStoreSymlink
+        "${dotfilesLocalPath}/dotfiles/nushell/.config/nushell";
     };
   };
 }
